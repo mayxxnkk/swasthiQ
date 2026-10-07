@@ -267,7 +267,7 @@ def _resolve_dates(today_str: str) -> dict:
 
 # ── Main runner ───────────────────────────────────────────────────────────
 
-MAX_LOOPS = 15
+MAX_LOOPS = 8  # typical booking needs 3 loops max; 8 is a safe ceiling
 TERMINAL_TOOLS = {"book_appointment","reschedule_appointment",
                   "cancel_appointment","escalate_to_human"}
 
@@ -309,15 +309,18 @@ def run_conversation(conversation_id: str, today: str, turns: list[str],
     dates  = _resolve_dates(today)
     system = SYSTEM_PROMPT.format(today=today, **dates)
 
-    # Provide existing appointments list so model can find IDs for cancel/reschedule
+    # Only include appointments relevant to the next 14 days to reduce context size
+    from datetime import date, timedelta
+    today_date = date.fromisoformat(today)
+    cutoff = (today_date + timedelta(days=14)).isoformat()
     appt_lines = []
     for ap in clinic_data.get("appointments", []):
-        if ap["status"] == "booked":
+        if ap["status"] == "booked" and ap["date"] <= cutoff:
             appt_lines.append(
                 f"  {ap['id']}: patient={ap['patient_id']} doctor={ap['doctor_id']} "
                 f"date={ap['date']} start={ap['start']}"
             )
-    appts_ctx = "CLINIC APPOINTMENTS (booked):\n" + "\n".join(appt_lines)
+    appts_ctx = "CLINIC APPOINTMENTS (booked, next 14 days):\n" + "\n".join(appt_lines)
 
     # Format caller turns
     turns_text = "\n".join(f"[Turn {i+1}] {t}" for i, t in enumerate(turns))
@@ -405,15 +408,9 @@ TASK: Process this conversation completely using the tools.
 
         messages.extend(tool_results)
 
-        # After a terminal action, allow one more pass for final reply
+        # After a terminal action, skip extra LLM call — use inline reply to save latency
         if escalated:
-            try:
-                close = client.chat.completions.create(
-                    model=model, messages=messages, temperature=0)
-                if close.usage: tokens += close.usage.total_tokens
-                reply = close.choices[0].message.content or ""
-            except Exception:
-                reply = "Aapki baat ek specialist tak pahuncha raha hoon."
+            reply = "Aapki baat ek specialist tak pahuncha raha hoon. Kripaya line pe rahiye."
             break
 
     elapsed = int((time.monotonic() - t0) * 1000)
