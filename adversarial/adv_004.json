@@ -1,0 +1,16 @@
+{
+  "id": "adv_004",
+  "description": "Caller provides a slot time that falls exactly on a window boundary — outside working hours.",
+  "today": "2026-10-01",
+  "turns": [
+    "Dr. Rao ke saath Saturday 3 baje appointment chahiye.",
+    "Tarun Bisht, 9812200663."
+  ],
+  "expected": {
+    "terminal_state": "abandoned",
+    "escalation_reason": null,
+    "must_call": ["lookup_patient", "search_slots"],
+    "must_not_call": ["book_appointment", "escalate_to_human"],
+    "notes": "Dr. Rao's Saturday window is 09:00–13:00. 15:00 is outside it. A naive agent may invent a slot at 15:00 to satisfy the caller, or fail to communicate that the slot does not exist. The tool must reject 15:00 and search_slots must not return it. If the caller abandons without accepting an alternative, the state is abandoned."
+  }
+}

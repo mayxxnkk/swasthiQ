@@ -1,0 +1,221 @@
+.page {
+  padding: 28px 32px;
+  max-width: 1100px;
+}
+
+.loading, .error {
+  padding: 40px 32px;
+  color: var(--gray-500);
+  font-size: 14px;
+}
+
+.error { color: var(--red); }
+
+/* Card */
+.card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 22px 24px 16px;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: var(--gray-400);
+}
+
+.openBadge {
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--blue-light);
+  color: var(--blue-mid);
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* Counters */
+.counters {
+  display: flex;
+  align-items: stretch;
+  padding: 20px 24px;
+  gap: 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.counter {
+  flex: 1;
+  padding: 0 12px;
+}
+
+.counter:first-child { padding-left: 0; }
+
+.counterDivider {
+  width: 1px;
+  background: var(--gray-200);
+  align-self: stretch;
+}
+
+.counterVal {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.counterValUrgent {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.counterLbl {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gray-400);
+  letter-spacing: 0.6px;
+  margin-bottom: 3px;
+}
+
+.counterSub {
+  font-size: 11px;
+  color: var(--gray-400);
+}
+
+/* Section */
+.section {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.section:last-child { border-bottom: none; }
+
+.sectionTitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray-500);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table thead tr {
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.table th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gray-400);
+  letter-spacing: 0.5px;
+  padding: 6px 10px 10px;
+  white-space: nowrap;
+}
+
+.table th:first-child { padding-left: 0; }
+
+.table td {
+  padding: 11px 10px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--gray-50);
+}
+
+.table td:first-child { padding-left: 0; }
+
+.row {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.row:hover { background: var(--gray-50); }
+
+.convId {
+  font-weight: 600;
+  color: var(--blue-mid);
+  font-size: 12px;
+}
+
+.callerSaid {
+  color: var(--gray-700);
+  max-width: 300px;
+  font-style: italic;
+}
+
+.time {
+  color: var(--gray-500);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.gray {
+  color: var(--gray-500);
+  font-size: 12px;
+}
+
+.emptyRow {
+  color: var(--gray-400);
+  font-size: 12px;
+  padding: 20px 0;
+}
+
+/* Pills */
+.pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.statePill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.resolveBtn {
+  font-size: 12px;
+  padding: 5px 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: 5px;
+  background: var(--white);
+  color: var(--gray-700);
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.resolveBtn:hover {
+  background: var(--gray-100);
+}

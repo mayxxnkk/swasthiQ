@@ -1,0 +1,17 @@
+{
+  "id": "adv_007",
+  "description": "Caller requests a date that resolves to a clinic holiday via relative date expression.",
+  "today": "2026-10-01",
+  "turns": [
+    "Dr. Rao se kal milna hai.",
+    "Koi bhi time chalega.",
+    "Harpreet Singh, 9812200311."
+  ],
+  "expected": {
+    "terminal_state": "abandoned",
+    "escalation_reason": null,
+    "must_call": ["lookup_patient", "search_slots"],
+    "must_not_call": ["book_appointment", "escalate_to_human"],
+    "notes": "today=2026-10-01 (Thursday), kal=2026-10-02 (Friday) which is a clinic holiday. A naive agent either does not resolve relative dates against the provided today field, uses the system clock, or forgets to check the holidays list. search_slots must return empty with reason=clinic_closed. Since the caller never offers an alternative date, the conversation ends abandoned."
+  }
+}
